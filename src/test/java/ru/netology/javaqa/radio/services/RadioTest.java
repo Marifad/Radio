@@ -6,6 +6,176 @@ import org.junit.jupiter.api.Test;
 public class RadioTest {
 
     @Test
+    public void testParametr() {
+        Radio rad = new Radio(30);
+        Assertions.assertEquals(30, rad.getNumberOfStations());
+    }
+
+    @Test
+    public void testParametrOneStation() {
+        Radio rad = new Radio(1);
+        Assertions.assertEquals(1, rad.getNumberOfStations());
+    }
+
+    @Test
+    public void testParametrZeroStations() {
+        Radio rad = new Radio(0);
+        Assertions.assertEquals(1, rad.getNumberOfStations());
+    }
+
+    @Test
+    public void shouldGetNumberOfStationsParametr() {
+
+        Radio rad = new Radio(30);
+        int expected = 30;
+        int actual = rad.getNumberOfStations();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotSetCurrentStationBelowLimitParametr() {
+
+        Radio rad = new Radio(30);
+        rad.setCurrentStation(-1);
+        int expected = 0;
+        int actual = rad.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotSetCurrentStationAboveLimitParametr() {
+
+        Radio rad = new Radio(30);
+        rad.setCurrentStation(30);
+        int expected = 0;
+        int actual = rad.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotSetCurrentStationAboveLimitParametr2() {
+
+        Radio rad = new Radio(30);
+        rad.setCurrentStation(31);
+        int expected = 0;
+        int actual = rad.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetCurrentStationParametr() {
+
+        Radio rad = new Radio(30);
+        rad.setCurrentStation(9);
+        int expected = 9;
+        int actual = rad.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetCurrentStationZeroParametr() {
+
+        Radio rad = new Radio(30);
+        rad.setCurrentStation(0);
+        int expected = 0;
+        int actual = rad.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+    @Test
+    public void shouldSetNextParametr() {
+        Radio rad = new Radio(30);
+        rad.setCurrentStation(28);
+        rad.next();
+        int expected = 29;
+        int actual = rad.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetNextIfZeroParametr() {
+        Radio rad = new Radio(30);
+        rad.setCurrentStation(0);
+        rad.next();
+        int expected = 1;
+        int actual = rad.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+        System.out.println(actual);
+
+    }
+
+    @Test
+    public void shouldNotSetNextParametr() {
+        Radio rad = new Radio(30);
+        rad.setCurrentStation(29);
+        rad.next();
+        int expected = 0;
+        int actual = rad.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+        System.out.println(actual);
+
+    }
+
+    @Test
+    public void shouldSetNextIfOneParametr() {
+        Radio rad = new Radio(30);
+        rad.setCurrentStation(1);
+        rad.next();
+        int expected = 2;
+        int actual = rad.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+        System.out.println(actual);
+
+    }
+
+    @Test
+    public void shouldSetPrevIfZeroParametr() {
+        Radio rad = new Radio(30);
+        rad.setCurrentStation(0);
+        rad.prev();
+        int expected = 29;
+        int actual = rad.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void shouldSetPrevIfMaxParametr() {
+        Radio rad = new Radio(30);
+        rad.setCurrentStation(29);
+        rad.prev();
+        int expected = 28;
+        int actual = rad.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void shouldNotSetPrevParametr() {
+        Radio rad = new Radio(30);
+        rad.setCurrentStation(0);
+        rad.prev();
+        int expected = 29;
+        int actual = rad.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void shouldSetPrevIfOneParametr() {
+        Radio rad = new Radio(30);
+        rad.setCurrentStation(1);
+        rad.prev();
+        int expected = 0;
+        int actual = rad.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+    @Test
     public void shouldNotSetCurrentStationBelowLimit() {
 
         Radio rad = new Radio();
@@ -81,7 +251,7 @@ public class RadioTest {
     public void shouldNotSetCurrentVolumeAboveLimit() {
 
         Radio rad = new Radio();
-        rad.setCurrentVolume(11);
+        rad.setCurrentVolume(101);
         int expected = 0;
         int actual = rad.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
@@ -213,9 +383,9 @@ public class RadioTest {
     @Test
     public void shouldNotIncreaseVolume() {
         Radio rad = new Radio();
-        rad.setCurrentVolume(10);
+        rad.setCurrentVolume(100);
         rad.increaseVolume();
-        int expected = 10;
+        int expected = 100;
         int actual = rad.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
 
